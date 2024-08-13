@@ -26,7 +26,7 @@ export default function RadioStations({ handleGifChange }) {
 
     return (
         <>
-            <h1 
+            <h1
                 className="font-caveat  md:p-2 lg:p-7 font-semibold text-xl sm:text-2xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
                 LofiHaven
             </h1>

@@ -10,7 +10,7 @@ export default function MusicPlayer() {
 
     return (
         <div>
-            <div className='transparent flex gap-6 text-white rounded-lg ml-[20px] '>
+            <div className='transparent flex gap-6 text-white rounded-lg ml-[50%] '>
                 
                 <button className='hover:opacity-80'><ChevronLeft size={50} /></button>
                 <button className='hover:opacity-80' onClick={togglePlayPause}>{isPlaying ? <Pause size={50} /> : <Play size={50} />}</button>
