@@ -7,8 +7,9 @@ import idleSong from "../../public/HomePage_Idle.mp3";
 export default function Example() {
   useEffect(() => {
     const audio = new Audio(idleSong);
+    audio.autoplay = true;
     audio.loop = true; 
-    audio.play()
+    audio.play();
 
     return () => {
       audio.pause();
@@ -21,7 +22,8 @@ export default function Example() {
     backgroundPosition: 'center', 
     height: '100vh', 
     width: '100%',
-    position: 'relative'
+    position: 'relative',
+    overflow: 'hidden' 
   };
 
   const overlayStyle = {
@@ -60,7 +62,7 @@ export default function Example() {
               }
             }}
           >
-            <h1 className="font-caveat font-semibold text-xl sm:text-2xl md:text-[40px] lg:text-[65px] text-white">
+            <h1 className="font-caveat font-semibold text-xl sm:text-2xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
               LofiHaven
             </h1>
           </motion.div>

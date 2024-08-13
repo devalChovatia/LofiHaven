@@ -1,43 +1,45 @@
-import React from 'react'
-import backgroundGif from "../assets/2.gif"
+import React, { useEffect, useState } from 'react';
+import backgroundGif from "../assets/3.gif";
+import RadioStations from '../components/RadioStations';
+import Request from '../components/Request';
+import Clock from '../components/Clock';
+import MusicPlayer from '../components/MusicPlayer';
 
 export default function MusicHub() {
+    const [gif, setGif] = useState()
+
+
+    useEffect(() => {
+        setGif(backgroundGif)
+    },[])
 
     const backgroundStyle = {
-        backgroundImage: `url(${backgroundGif})`,
+        backgroundImage: `url(${gif})`,
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         height: '100vh', 
         width: '100%',
-        position: 'relative'
+        position: 'relative',
       };
 
-  return (
-    <div style={backgroundStyle} className="flex flex-col items-center justify-center p-4">
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-6 md:left-6 lg:top-5 lg:left-5">
-            <h1 className="font-caveat border-b-2 md:p-2 lg:p-7 font-semibold text-xl sm:text-2xl md:text-[40px] lg:text-[65px] text-white">
-                LofiHaven
-            </h1>
-            <ul className="text-white w-full flex flex-col gap-3 md:gap-8 md:pt-8 md:pl-2 lg:gap-7 lg:pl-12 lg:text-xl border-r-2">
-                <li>Radio Channel 1</li>
-                <li>Radio Channel 2</li>
-                <li>Radio Channel 3</li>
-                <li>Radio Channel 4</li>
-                <li>Radio Channel 5</li>
-                <li>Radio Channel 6</li>
-                <li>Radio Channel 7</li>
-                <li>Radio Channel 8</li>
-                <li>Radio Channel 9</li>
-                <li>Radio Channel 10</li>
 
-            </ul>
-            <div>
-                <button>
-                    Submit a Request
-                </button>
-            </div>
+    const handleGifChange = (gif) => {
+        setGif(gif)
+    }
+
+  return (
+    <div style={backgroundStyle} className="flex flex-col flex-wrap items-center justify-center p-4">
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-6 md:left-6 lg:top-5 lg:left-5 ">
+            <RadioStations handleGifChange={handleGifChange}/>
+            <Request />
+        </div>
+        <div className="text-white text-[25px] font-sawarabi absolute top-4 right-4">
+            <Clock />
+        </div>
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+            <MusicPlayer />
         </div>
 
     </div>
-  )
+  );
 }
