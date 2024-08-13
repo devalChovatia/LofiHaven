@@ -21,7 +21,7 @@ export default function MusicHub() {
         return () => {
           audio.pause();
         };
-      }, []);
+    }, []);
 
     useEffect(() => {
         setGif(backgroundGif);
@@ -53,26 +53,35 @@ export default function MusicHub() {
     };
 
     return (
-        <div style={backgroundStyle} className="flex flex-col flex-wrap items-center justify-center p-4">
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-6 md:left-6 lg:top-5 lg:left-5 ">
-                <RadioStations handleGifChange={handleGifChange}/>
+        <div style={backgroundStyle} className="flex flex-col justify-between p-4">
+            <header className="flex justify-between items-start mb-4">
+                <div className="mt-4">
+                    <RadioStations handleGifChange={handleGifChange}/>
+                </div>
+                <div className="text-white sm:text-[15px] md:text-[25px] lg:text-[25px] font-sawarabi">
+                    <Clock />
+                </div>
+            </header>
+            <div className="">
                 <Request />
+            </div>    
+         
+            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-16">
+                <div className=''>
+                    <Links />
+                </div>
             </div>
-            <div className="text-white text-[30px] font-sawarabi absolute top-4 right-4">
-                <Clock />
+            <div className='flex gap-20 md:gap-[250px] items-center md:mb-6'>
+                <div className="ml-12 md:ml-[35%]">
+                    <MusicPlayer />
+                </div>
+                <button 
+                    onClick={handleFullscreenToggle} 
+                    className="p-2 transparent text-white rounded hidden sm:block " 
+                >
+                    {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
+                </button>
             </div>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                <MusicPlayer />
-            </div>
-            <div className='absolute bottom-12 right-12'>
-                <Links />
-            </div>
-            <button 
-                onClick={handleFullscreenToggle} 
-                className="absolute md:bottom-4 sm:hidden md:right-4 md:p-2 md:transparent md:text-white md:rounded"
-            >
-                {isFullscreen ? <Minimize/> : <Maximize/>}
-            </button>
         </div>
     );
 }

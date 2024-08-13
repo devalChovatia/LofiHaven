@@ -6,9 +6,9 @@ export default function Links() {
 
   return (
     <div>
-        <div className='text-white flex flex-col items-center'>
+        <div className='text-white flex flex-col items-center text-[10px] md:text-[20px]'>
             <div>LiveStream Name</div>
-            <button><FaYoutube size={24}/></button>
+            <button><FaYoutube className='w-4 h-4 md:w-6 md:h-6'/></button>
         </div>
     </div>
   )
