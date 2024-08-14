@@ -58,7 +58,7 @@ export default function MusicHub() {
                 <div className="mt-4">
                     <RadioStations handleGifChange={handleGifChange}/>
                 </div>
-                <div className="text-white sm:text-[15px] md:text-[25px] lg:text-[25px] font-sawarabi">
+                <div className="text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
                     <Clock />
                 </div>
             </header>
@@ -66,7 +66,7 @@ export default function MusicHub() {
                 <Request />
             </div>    
          
-            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 lg:ml-[650px] xl:ml-[1100px]">
+            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 lg:ml-[650px] xl:ml-[1100px] ">
                     <Links />
             </div>
             <div className='flex gap-20 md:gap-[250px] lg:gap-[330px] xl:gap-[550px] items-center md:mb-6 '>
