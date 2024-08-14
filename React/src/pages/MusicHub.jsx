@@ -66,7 +66,7 @@ export default function MusicHub() {
                 <Request />
             </div>    
          
-            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 lg:ml-[650px] xl:ml-[1100px] 2xl:ml-[1300px]">
+            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 xl:-mt-52 lg:ml-[650px] xl:ml-[1100px] 2xl:ml-[1300px]">
                     <Links />
             </div>
             <div className='flex gap-20 md:gap-[250px] lg:gap-[330px] xl:gap-[550px] 2xl:gap-[570px] items-center md:mb-6 '>

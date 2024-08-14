@@ -14,4 +14,4 @@ app.add_middleware(
 
 @app.get("/")
 async def getFR():
-    return {'message': 'Hello World'}  
+    return {'message': 'Hello World'}

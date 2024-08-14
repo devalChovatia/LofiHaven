@@ -6,8 +6,16 @@ export default function MusicPlayer() {
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
+
     };
 
+    const getGif = async () => {
+        try {
+            const res = await axios.post('htto://localhost:3000/getGifs')
+        } catch (error) {
+            
+        }
+    }
     return (
         <div>
             <div className='transparent flex gap-6 text-white rounded-lg ml-[30%]'>

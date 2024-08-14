@@ -24,7 +24,7 @@ export default function RadioStations({ handleGifChange }) {
                 LofiHaven
             </h1>
             <ul style={{ borderRight: '2px solid rgba(255, 255, 255, 0.1)' }}
-                className="text-white  md:w-[220px] max-w-xs lg:max-w-md xl:max-w-lg 2xl:max-w-xl font-sawarabi flex flex-col p-3 gap-3 md:gap-12 md:pt-6 md:pl-2 text-sm lg:gap-9 xl:gap-6 lg:pl-6 sm:text-[10px] md:text-[20px] lg:text-xl xl:text-[18px] 2xl:text-[20px] 2xl:gap-8 border-r-2 border-opacity-10">
+                className="text-white  md:w-[220px] max-w-xs lg:max-w-md xl:max-w-lg 2xl:max-w-xl font-sawarabi flex flex-col p-3 gap-3 md:gap-12 md:pt-6 md:pl-2 text-sm lg:gap-9 xl:gap-7 lg:pl-6 sm:text-[10px] md:text-[20px] lg:text-xl xl:text-[18px] 2xl:text-[20px] 2xl:gap-10 border-r-2 border-opacity-10">
                 <li onClick={() => handleGifSelect(TokyoTunes)}><button>Tokyo Tunes</button></li>
                 <li onClick={() => handleGifSelect(ChillCityGrooves)}><button>Chill City Grooves</button></li>
                 <li onClick={() => handleGifSelect(StudySerenity)}><button>Study Serenity</button></li>
