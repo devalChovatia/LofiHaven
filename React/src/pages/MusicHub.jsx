@@ -66,10 +66,10 @@ export default function MusicHub() {
                 <Request />
             </div>    
          
-            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 lg:ml-[650px] xl:ml-[1100px] 2xl:ml-[1250px]">
+            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 lg:ml-[650px] xl:ml-[1100px] 2xl:ml-[1300px]">
                     <Links />
             </div>
-            <div className='flex gap-20 md:gap-[250px] lg:gap-[330px] xl:gap-[550px] 2xl:gap-[740px] items-center md:mb-6 '>
+            <div className='flex gap-20 md:gap-[250px] lg:gap-[330px] xl:gap-[550px] 2xl:gap-[540px] items-center md:mb-6 '>
                 <div className="ml-12 md:ml-[35%] lg:ml-[42%] xl:ml-[45%] 2xl:ml-[47%]">
                     <MusicPlayer />
                 </div>
