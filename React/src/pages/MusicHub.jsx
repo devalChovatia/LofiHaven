@@ -60,12 +60,10 @@ export default function MusicHub() {
             <div className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
                 <Clock />
             </div>
-            <header className=" ">
-                <div className="">
-                    <RadioStations handleGifChange={handleGifChange}/>
-                </div>
-            </header>
-            <div className='border'>
+            <div className="flex flex-col md:flex-row md:space-x-4">
+                <RadioStations handleGifChange={handleGifChange}/>
+            </div>
+            <div className=''>
                 <div className="absolute bottom-48 md:bottom-20 md:left-2">
                     <Request />
                 </div>    
