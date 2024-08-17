@@ -53,32 +53,36 @@ export default function MusicHub() {
     };
 
     return (
-        <div style={backgroundStyle} className="flex flex-col justify-between p-4">
-            <header className="flex justify-between items-start mb-4">
-                <div className="mt-4">
+        <div style={backgroundStyle} className="">
+            <h1 className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-12 lg:left-12 font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
+                LofiHaven
+            </h1>
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
+                <Clock />
+            </div>
+            <header className=" ">
+                <div className="">
                     <RadioStations handleGifChange={handleGifChange}/>
                 </div>
-                <div className="text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
-                    <Clock />
-                </div>
             </header>
-            <div className="">
-                <Request />
-            </div>    
-         
-            <div className="mt-5 mr-[200px] md:ml-[400px] md:w-[500px] md:-mt-48 xl:-mt-52 lg:ml-[650px] xl:ml-[1100px] 2xl:ml-[1300px]">
-                    <Links />
-            </div>
-            <div className='flex gap-20 md:gap-[250px] lg:gap-[330px] xl:gap-[550px] 2xl:gap-[570px] items-center md:mb-6 '>
-                <div className="ml-12 md:ml-[35%] lg:ml-[42%] xl:ml-[45%] 2xl:ml-[47%]">
-                    <MusicPlayer />
+            <div className='border'>
+                <div className="absolute bottom-48 md:bottom-20 md:left-2">
+                    <Request />
+                </div>    
+                <div className="absolute bottom-60 right-6 md:bottom-32 md:right-6">
+                        <Links />
                 </div>
-                <button 
-                    onClick={handleFullscreenToggle} 
-                    className="p-2 transparent text-white rounded hidden sm:block " 
-                >
-                    {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
-                </button>
+                <div className='absolute bottom-32 md:bottom-4 left-1/2 transform -translate-x-1/2 flex items-center p-2'>
+                    <div className="">
+                        <MusicPlayer />
+                    </div>
+                    <button 
+                        onClick={handleFullscreenToggle} 
+                        className="transparent text-white rounded hidden sm:block ml-auto" 
+                    >
+                        {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
+                    </button>
+                    </div>
             </div>
         </div>
     );

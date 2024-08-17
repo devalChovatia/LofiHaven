@@ -16,28 +16,21 @@ export default function RadioStations({ handleGifChange }) {
         handleGifChange(gif)
     }
 
-
-
-    return (
-        <>
-            <h1 className="font-caveat p-2 md:p-4 lg:p-6 font-semibold text-2xl sm:text-2xl md:text-[40px] lg:text-4xl xl:text-5xl text-white">
-                LofiHaven
-            </h1>
-            <ul style={{ borderRight: '2px solid rgba(255, 255, 255, 0.1)' }}
-                className="text-white  md:w-[220px] max-w-xs xl:w-[240px] 2xl:w-[260px] lg:max-w-md xl:max-w-lg 2xl:max-w-xl font-sawarabi flex flex-col p-3 gap-3 md:gap-12 md:pt-6 md:pl-2 text-sm lg:gap-9 xl:gap-7 lg:pl-6 sm:text-[10px] md:text-[20px] lg:text-xl xl:text-[18px] 2xl:text-[20px] 2xl:gap-9 border-r-2 border-opacity-10">
-                <li onClick={() => handleGifSelect(TokyoTunes)}><button>Tokyo Tunes</button></li>
-                <li onClick={() => handleGifSelect(ChillCityGrooves)}><button>Chill City Grooves</button></li>
-                <li onClick={() => handleGifSelect(StudySerenity)}><button>Study Serenity</button></li>
-                <li onClick={() => handleGifSelect(CozyCoffeeBeats)}><button>Cozy Coffee Beats</button></li>
-                <li onClick={() => handleGifSelect(QuietQuarters)}><button>Quiet Quarters</button></li>
-                <li onClick={() => handleGifSelect(ZenDenFlows)}><button>Zen Den Flows</button></li>
-                <li onClick={() => handleGifSelect(DreamyBeats)}><button>Dreamy Beats</button></li>
-                <li onClick={() => handleGifSelect(SereneScenes)}><button>Serene Scenes</button></li>
-                <li onClick={() => handleGifSelect(LateNightLights)}><button>Late Night Lights</button></li>
-                <li onClick={() => handleGifSelect(LoFiFlows)}><button>Lo-Fi Flows</button></li>
-            </ul>
-        </>
-    );
-}
-
-//style={{ borderRight: '2px solid rgba(255, 255, 255, 0.1)' }}
+        return (
+            <>
+                
+                <ul className="absolute top-32 left-4 sm:left-6 md:left-8 lg:left-12 text-white font-sawarabi space-y-2 border-r-2 border-white border-opacity-10 pr-2">
+                    <li onClick={() => handleGifSelect(TokyoTunes)}><button className="hover:underline">Tokyo Tunes</button></li>
+                    <li onClick={() => handleGifSelect(ChillCityGrooves)}><button className="hover:underline">Chill City Grooves</button></li>
+                    <li onClick={() => handleGifSelect(StudySerenity)}><button className="hover:underline">Study Serenity</button></li>
+                    <li onClick={() => handleGifSelect(CozyCoffeeBeats)}><button className="hover:underline">Cozy Coffee Beats</button></li>
+                    <li onClick={() => handleGifSelect(QuietQuarters)}><button className="hover:underline">Quiet Quarters</button></li>
+                    <li onClick={() => handleGifSelect(ZenDenFlows)}><button className="hover:underline">Zen Den Flows</button></li>
+                    <li onClick={() => handleGifSelect(SereneScenes)}><button className="hover:underline">Serene Scenes</button></li>
+                    <li onClick={() => handleGifSelect(LateNightLights)}><button className="hover:underline">Late Night Lights</button></li>
+                    <li onClick={() => handleGifSelect(LoFiFlows)}><button className="hover:underline">Lo-Fi Flows</button></li>
+                </ul>
+            </>
+        );
+    }
+    

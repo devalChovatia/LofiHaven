@@ -62,7 +62,7 @@ export default function Example() {
               }
             }}
           >
-            <h1 className="font-caveat font-semibold text-xl sm:text-2xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
+            <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
               LofiHaven
             </h1>
           </motion.div>
