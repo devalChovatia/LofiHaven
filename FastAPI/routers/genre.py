@@ -6,7 +6,7 @@ from database import SessionLocal
 from starlette import status
 from models import Genres
 
-router = APIRouter()
+router = APIRouter(tags=['genre'])
 
 def get_db():
     db = SessionLocal()

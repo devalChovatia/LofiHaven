@@ -6,7 +6,7 @@ from database import SessionLocal
 from starlette import status
 from models import Livestream
 
-router = APIRouter()
+router = APIRouter(tags=['livestream'])
 
 def get_db():
     db = SessionLocal()
@@ -38,12 +38,6 @@ async def getLivestreamsByGenre(db: db_dependency, genreID: int = Path(gt=0)):
     if livestream_model is None:
         raise HTTPException(status_code=404, detail='No Livestreams Found For This Genre')
     return livestream_model
-
-@router.post('/livestreams', status_code=status.HTTP_201_CREATED)
-async def addLivestream(db: db_dependency, livestreamToAdd: LivestreamRequest):
-    livestream_model = Livestream(**livestreamToAdd.model_dump())
-    db.add(livestream_model)
-    db.commit()
 
 @router.delete('/livestreams', status_code=status.HTTP_204_NO_CONTENT)
 async def deleteLivestream(db: db_dependency, livestream_id: int = Query(gt=0)):

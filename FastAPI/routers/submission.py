@@ -6,7 +6,7 @@ from database import SessionLocal
 from starlette import status
 from models import Submission
 
-router = APIRouter()
+router = APIRouter(tags=['submission'])
 
 def get_db():
     db = SessionLocal()
@@ -21,7 +21,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 class SubmissionRequest(BaseModel):
     submission_type: str
     submission_request: str = Field(max_length=75)
-    
+
 
 @router.get('/submission', status_code=status.HTTP_200_OK)
 async def getAllSubmissions(db: db_dependency):

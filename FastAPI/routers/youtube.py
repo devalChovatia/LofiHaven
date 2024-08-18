@@ -7,7 +7,7 @@ from database import SessionLocal
 from pydantic import BaseModel, Field
 from models import Livestream as DBLivestream
 
-router = APIRouter()
+router = APIRouter(tags=['youtube'])
 
 def get_db():
     db = SessionLocal()
@@ -27,8 +27,8 @@ class Livestream(BaseModel):
 
 API_KEY = 'AIzaSyDuaSh0aE3hfJoAUWlPhRnKCKziG8VWemE'
 
-@router.get('/video', status_code=status.HTTP_200_OK)
-async def getVideo(db:db_dependency, url:str, genre_id: int = Query(gt=0)):
+@router.get('/youtube', status_code=status.HTTP_200_OK)
+async def getYoutubeVideo(db:db_dependency, url:str, genre_id: int = Query(gt=0)):
     youtube = build('youtube', 'v3', developerKey=API_KEY)
     video_id = url.split('v=')[1]
     video_response = youtube.videos().list(
