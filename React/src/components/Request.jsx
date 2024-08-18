@@ -9,7 +9,7 @@ export default function Request() {
     <div>
       <button
         onClick={onClick}
-        className="text-white font-sawarabi border rounded-3xl hover:bg-white hover:bg-opacity-20"
+        className="text-white font-sawarabi border rounded-3xl text-[13px] md:text-[13px] xl:text-[15px] w-[100px] md:w-[200px] hover:bg-white hover:bg-opacity-20"
                 >
         Submit a Request
       </button>

@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import models 
+from database import engine
+from routers import genre
 
 app = FastAPI()
 
@@ -12,6 +15,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def getFR():
-    return {'message': 'Hello World'}
+models.Base.metadata.create_all(bind=engine)
+
+app.include_router(genre.router)

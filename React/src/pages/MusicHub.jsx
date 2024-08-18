@@ -7,6 +7,7 @@ import MusicPlayer from '../components/MusicPlayer';
 import idleSong from "../../public/HomePage_Idle.mp3";
 import Links from '../components/Links';
 import { Maximize, Minimize } from 'lucide-react';
+import axios from 'axios'
 
 export default function MusicHub() {
     const [gif, setGif] = useState();
@@ -60,27 +61,25 @@ export default function MusicHub() {
             <div className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
                 <Clock />
             </div>
-            <div className="flex flex-col md:flex-row md:space-x-4">
+            <div className="">
                 <RadioStations handleGifChange={handleGifChange}/>
             </div>
-            <div className=''>
-                <div className="absolute bottom-48 md:bottom-20 md:left-2">
+            <div className='flex'>
+                <div className="absolute bottom-16 left-4">
                     <Request />
-                </div>    
-                <div className="absolute bottom-60 right-6 md:bottom-32 md:right-6">
+                </div>
+                <div className="absolute bottom-28 right-6 md:right-0">
                         <Links />
                 </div>
-                <div className='absolute bottom-32 md:bottom-4 left-1/2 transform -translate-x-1/2 flex items-center p-2'>
-                    <div className="">
-                        <MusicPlayer />
-                    </div>
-                    <button 
-                        onClick={handleFullscreenToggle} 
-                        className="transparent text-white rounded hidden sm:block ml-auto" 
-                    >
-                        {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
-                    </button>
-                    </div>
+            <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
+                <div className="flex-grow flex justify-center">
+                    <MusicPlayer />
+                </div>
+                <button 
+                    onClick={handleFullscreenToggle} className="text-white rounded hidden sm:block ml-auto">
+                    {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
+                </button>
+            </div>
             </div>
         </div>
     );
