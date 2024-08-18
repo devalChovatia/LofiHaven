@@ -18,6 +18,7 @@ export default function MusicHub() {
         audio.autoplay = true;
         audio.loop = true; 
         audio.play();
+        audio.pause()
     
         return () => {
           audio.pause();
