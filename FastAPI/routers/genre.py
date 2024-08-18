@@ -20,7 +20,6 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 class GenreRequest(BaseModel):
     genre_name: str = Field(min_length=4)
-    genre_theme: str
 
 class LivestreamRequest(BaseModel):
     channel_name: str = Field(min_length=3, max_length=20)

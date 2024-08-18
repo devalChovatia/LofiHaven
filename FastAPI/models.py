@@ -8,7 +8,6 @@ class Genres(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     genre_name = Column(String, unique=True)
-    genre_theme = Column(String, unique=True)
 
 class Livestream(Base):
     __tablename__ = 'Livestreams'
