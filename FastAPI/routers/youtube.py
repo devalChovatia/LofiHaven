@@ -6,8 +6,14 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 from pydantic import BaseModel, Field
 from models import Livestream as DBLivestream
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 router = APIRouter(tags=['youtube'])
+
 
 def get_db():
     db = SessionLocal()
@@ -24,8 +30,6 @@ class Livestream(BaseModel):
     livestream_name: str = Field(min_length=3, max_length=100)
     livestream_link: str
     genre_id: int = Field(gt=0)
-
-API_KEY = 'AIzaSyDuaSh0aE3hfJoAUWlPhRnKCKziG8VWemE'
 
 @router.get('/youtube', status_code=status.HTTP_200_OK)
 async def getYoutubeVideo(db:db_dependency, url:str, genre_id: int = Query(gt=0)):
