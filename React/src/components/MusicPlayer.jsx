@@ -1,12 +1,10 @@
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function MusicPlayer() {
-    const [isPlaying, setIsPlaying] = useState(false);
+export default function MusicPlayer({ isPlaying, setIsPlaying }) {
 
     const togglePlayPause = () => {
-        setIsPlaying(!isPlaying);
-
+        setIsPlaying(prev => !prev);
     };
 
     return (

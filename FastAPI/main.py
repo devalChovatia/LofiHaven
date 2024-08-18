@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import models 
 from database import engine
-from routers import genre
+from routers import genre, livestream, submission
 
 app = FastAPI()
 
@@ -18,3 +18,5 @@ app.add_middleware(
 models.Base.metadata.create_all(bind=engine)
 
 app.include_router(genre.router)
+app.include_router(livestream.router)
+app.include_router(submission.router)

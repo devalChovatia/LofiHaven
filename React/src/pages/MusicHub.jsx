@@ -7,23 +7,30 @@ import MusicPlayer from '../components/MusicPlayer';
 import idleSong from "../../public/HomePage_Idle.mp3";
 import Links from '../components/Links';
 import { Maximize, Minimize } from 'lucide-react';
-import axios from 'axios'
 
 export default function MusicHub() {
     const [gif, setGif] = useState();
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [audio, setAudio] = useState(new Audio(idleSong));
 
     useEffect(() => {
-        const audio = new Audio(idleSong);
-        audio.autoplay = true;
-        audio.loop = true; 
-        audio.play();
-        audio.pause()
-    
+        const audioInstance = new Audio(idleSong);
+        audioInstance.loop = true; 
+        setAudio(audioInstance);
+
         return () => {
-          audio.pause();
+            audioInstance.pause();
         };
     }, []);
+
+    useEffect(() => {
+        if (isPlaying) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }, [isPlaying, audio]);
 
     useEffect(() => {
         setGif(backgroundGif);
@@ -70,17 +77,17 @@ export default function MusicHub() {
                     <Request />
                 </div>
                 <div className="absolute bottom-28 right-6 md:right-0">
-                        <Links />
+                    <Links />
                 </div>
-            <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
-                <div className="flex-grow flex justify-center">
-                    <MusicPlayer />
+                <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
+                    <div className="flex-grow flex justify-center">
+                        <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+                    </div>
+                    <button 
+                        onClick={handleFullscreenToggle} className="text-white rounded hidden sm:block ml-auto">
+                        {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
+                    </button>
                 </div>
-                <button 
-                    onClick={handleFullscreenToggle} className="text-white rounded hidden sm:block ml-auto">
-                    {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
-                </button>
-            </div>
             </div>
         </div>
     );
