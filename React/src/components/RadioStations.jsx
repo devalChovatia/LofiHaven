@@ -46,14 +46,15 @@ export default function RadioStations({ handleGifChange }) {
     }, []);
 
     return (
-        <>
-            <ul className="absolute p-2 flex flex-col gap-1 top-40 left-4 sm:left-6 md:top-48 md:left-8 lg:left-12 w-[230px] text-[11px] sm:text-[13px] xl:top-60 xl:text-[15px] 2xl:top-72 2xl:text-[14px] text-white font-sawarabi space-y-2 border-r-2 border-white border-opacity-10 pr-2">
+        <div className='mt-12 md:mt-20 xl:mt-32'>
+        {/*  */}
+            <ul className="flex flex-col pl-4 md:pl-8 gap-1 text-[11px] md:w-[230px] xl:text-[15px] xl:w-[300px] xl:gap-2 text-white font-sawarabi space-y-2 border-r-2 border-white border-opacity-10 ">
                 {genres.map((genre, index) => (
                     <li key={index} onClick={() => handleGifSelect(gifs[genre])}>
                         <button className={buttonClass(gifs[genre])}>{genre}</button>
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }

@@ -63,35 +63,39 @@ export default function MusicHub() {
 
     return (
         <div style={backgroundStyle} className="">
-            <div className='flex flex-col text-center lg:flex-row md:text-left lg:justify-between px-5 pt-10 '>
+            <div className='flex flex-col text-center md:flex-row md:text-left md:justify-between px-5 pt-10'>
                 <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
                 LofiHaven
                 </h1>
-                <div className="md:text-3xl font-sawarabi sm:text-xl text-white">
+                <div className="md:text-xl font-sawarabi sm:text-xl text-white">
                 <Clock />
                 </div>
                 
             </div>
-            <div className="border border-red-500">
-                <RadioStations handleGifChange={handleGifChange}/>
-            </div>
-            {/* <div className='flex'>
-                <div className="absolute bottom-16 left-4">
+            <div className='flex flex-col gap-6 xl:gap-20 xl:w-[275px]'>
+                <div className="">
+                    <RadioStations handleGifChange={handleGifChange}/>
+                </div>
+                <div className="">
                     <Request />
                 </div>
-                <div className="absolute bottom-28 right-6 md:right-0">
+            </div>
+            <div className='absolute bottom-1 w-full p-2 flex flex-col md:flex-row items-center justify-between mt-5 gap-7 md:mt-[60px]'>
+                <div className="md:ml-4">
                     <Links />
+                </div>  
+                    <div className="">
+                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
                 </div>
-                <div className='absolute bottom-4 border left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
-                    <div className="flex-grow flex justify-center">
-                        <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-                    </div>
-                    <button 
-                        onClick={handleFullscreenToggle} className="text-white rounded hidden sm:block ml-auto">
-                        {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
-                    </button>
-                </div>
-            </div> */}
-        </div>
+                <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block">
+                    {isFullscreen ? <Minimize className='w-6 h-6 xl:w-8 xl:h-8'/> : <Maximize className='w-6 h-6 xl:w-8 xl:h-8' />}
+                </button>  
+                
+            </div>
+
+                {/* mt-5 mr-5 text-white rounded hidden sm:block ml-auto */}
+
+
+            </div>
     );
 }
