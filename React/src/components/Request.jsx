@@ -18,10 +18,14 @@ export default function Request() {
     try {
       await axios.post('http://localhost:8000/submission', data)
       alert('Request Successfully Submitted')
+      setRequestText('')
+      setRequestType('')
       setOpen(false)
     } catch (error) {
       console.log(error)
       alert('Failed to Submit Request')
+      setRequestText('')
+      setRequestType('')
     }
   }
 
