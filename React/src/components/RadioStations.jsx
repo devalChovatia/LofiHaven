@@ -51,7 +51,6 @@ export default function RadioStations({ handleGifChange }) {
                 {genres.map((genre, index) => (
                     <li key={index} onClick={() => handleGifSelect(gifs[genre])}>
                         <button className={buttonClass(gifs[genre])}>{genre}</button>
-                        
                     </li>
                 ))}
             </ul>

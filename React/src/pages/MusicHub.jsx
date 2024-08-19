@@ -42,7 +42,7 @@ export default function MusicHub() {
         backgroundPosition: 'center', 
         height: '100vh', 
         width: '100%',
-        position: 'relative',
+
     };
 
     const handleGifChange = (gif) => {
@@ -63,23 +63,26 @@ export default function MusicHub() {
 
     return (
         <div style={backgroundStyle} className="">
-            <h1 className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-12 lg:left-12 font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
+            <div className='flex flex-col text-center lg:flex-row md:text-left lg:justify-between px-5 pt-10 '>
+                <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
                 LofiHaven
-            </h1>
-            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white sm:text-[15px] md:text-[25px] lg:text-[25px] xl:text-[27px] font-sawarabi">
+                </h1>
+                <div className="md:text-3xl font-sawarabi sm:text-xl text-white">
                 <Clock />
+                </div>
+                
             </div>
-            <div className="">
+            <div className="border border-red-500">
                 <RadioStations handleGifChange={handleGifChange}/>
             </div>
-            <div className='flex'>
+            {/* <div className='flex'>
                 <div className="absolute bottom-16 left-4">
                     <Request />
                 </div>
                 <div className="absolute bottom-28 right-6 md:right-0">
                     <Links />
                 </div>
-                <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
+                <div className='absolute bottom-4 border left-1/2 transform -translate-x-1/2 flex items-center justify-center w-full p-2'>
                     <div className="flex-grow flex justify-center">
                         <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
                     </div>
@@ -88,7 +91,7 @@ export default function MusicHub() {
                         {isFullscreen ? <Minimize className='w-8 h-8'/> : <Maximize className='w-8 h-8'/>}
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
