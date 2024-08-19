@@ -7,30 +7,34 @@ import MusicPlayer from '../components/MusicPlayer';
 import idleSong from "../../public/HomePage_Idle.mp3";
 import Links from '../components/Links';
 import { Maximize, Minimize } from 'lucide-react';
+import AudioSlider from '../components/AudioSlider';
 
 export default function MusicHub() {
     const [gif, setGif] = useState();
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [audio, setAudio] = useState(new Audio(idleSong));
+    const [volume, setVolume] = useState(50); // Volume in percentage
+    const [audio] = useState(new Audio(idleSong)); // Create the audio instance only once
 
     useEffect(() => {
-        const audioInstance = new Audio(idleSong);
-        audioInstance.loop = true; 
-        setAudio(audioInstance);
+        audio.loop = true; 
+        audio.volume = volume / 100; // Set initial volume
 
-        return () => {
-            audioInstance.pause();
-        };
-    }, []);
-
-    useEffect(() => {
         if (isPlaying) {
             audio.play();
         } else {
             audio.pause();
         }
-    }, [isPlaying, audio]);
+
+        // Clean up function
+        return () => {
+            audio.pause();
+        };
+    }, [audio, isPlaying]); // Only recreate audio instance on play state change
+
+    useEffect(() => {
+        audio.volume = volume / 100; // Update volume on the existing audio instance
+    }, [volume, audio]);
 
     useEffect(() => {
         setGif(backgroundGif);
@@ -42,7 +46,6 @@ export default function MusicHub() {
         backgroundPosition: 'center', 
         height: '100vh', 
         width: '100%',
-
     };
 
     const handleGifChange = (gif) => {
@@ -61,6 +64,10 @@ export default function MusicHub() {
         }
     };
 
+    const handleVolumeChange = (e) => {
+        setVolume(e.target.value);
+    };
+
     return (
         <div style={backgroundStyle} className="">
             <div className='flex flex-col text-center md:flex-row md:text-left md:justify-between px-5 pt-10'>
@@ -70,7 +77,6 @@ export default function MusicHub() {
                 <div className="md:text-xl font-sawarabi xl:text-2xl text-white">
                 <Clock />
                 </div>
-                
             </div>
             <div className='flex flex-col gap-6 xl:gap-20 xl:w-[275px]'>
                 <div className="">
@@ -84,7 +90,8 @@ export default function MusicHub() {
                 <div className="md:ml-4">
                     <Links />
                 </div>  
-                    <div className="">
+                <div className="flex flex-col items-center">
+                    <AudioSlider volume={volume} onVolumeChange={handleVolumeChange} />
                     <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
                 </div>
                 <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block md:mr-4">
