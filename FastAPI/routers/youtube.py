@@ -60,7 +60,6 @@ async def storeLivestreamToDB(db: Session, livestream_name: str, channel_name: s
             channel_name=channel_name,
             livestream_link=livestream_link, 
             genre_id=genre_id)
-    
         db.add(livestream_model)
         db.commit()
     except Exception as e:

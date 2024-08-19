@@ -13,12 +13,22 @@ export default function MusicHub() {
     const [gif, setGif] = useState();
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [volume, setVolume] = useState(50); // Volume in percentage
-    const [audio] = useState(new Audio(idleSong)); // Create the audio instance only once
+    const [volume, setVolume] = useState(50);
+    const [audio] = useState(new Audio(idleSong));
+    const [channelName, setChannelName] = useState(null);
+    const [livestreamLink, setLivestreamLink] = useState()
+
+    const handleChannelName = (name) => {
+        setChannelName(name);
+    };
+
+    const handleLivestreamLink = (link) => {
+        setLivestreamLink(link)
+    }
 
     useEffect(() => {
-        audio.loop = true; 
-        audio.volume = volume / 100; // Set initial volume
+        audio.loop = true;
+        audio.volume = volume / 100;
 
         if (isPlaying) {
             audio.play();
@@ -26,14 +36,13 @@ export default function MusicHub() {
             audio.pause();
         }
 
-        // Clean up function
         return () => {
             audio.pause();
         };
-    }, [audio, isPlaying]); // Only recreate audio instance on play state change
+    }, [audio, isPlaying]);
 
     useEffect(() => {
-        audio.volume = volume / 100; // Update volume on the existing audio instance
+        audio.volume = volume / 100;
     }, [volume, audio]);
 
     useEffect(() => {
@@ -42,9 +51,9 @@ export default function MusicHub() {
 
     const backgroundStyle = {
         backgroundImage: `url(${gif})`,
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center', 
-        height: '100vh', 
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
         width: '100%',
     };
 
@@ -72,23 +81,23 @@ export default function MusicHub() {
         <div style={backgroundStyle} className="">
             <div className='flex flex-col text-center md:flex-row md:text-left md:justify-between px-5 pt-10'>
                 <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
-                LofiHaven
+                    LofiHaven
                 </h1>
                 <div className="md:text-xl font-sawarabi xl:text-2xl text-white">
-                <Clock />
+                    <Clock />
                 </div>
             </div>
             <div className='flex flex-col gap-6 xl:gap-20 xl:w-[275px]'>
                 <div className="">
-                    <RadioStations handleGifChange={handleGifChange}/>
+                    <RadioStations handleGifChange={handleGifChange} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} />
                 </div>
                 <div className="">
                     <Request />
                 </div>
             </div>
-            <div className='absolute bottom-1 w-full p-2 flex flex-col md:flex-row items-center justify-between gap-6'>
-                <div className="md:ml-4">
-                    <Links />
+            <div className='absolute bottom-1 w-full p-2 flex flex-col md:flex-row items-center justify-between gap-6 text-overflow'>
+                <div className="md:ml-4 fixed-width-container">
+                    <Links channelName={channelName} livestreamLink={livestreamLink} />
                 </div>  
                 <div className="flex flex-col items-center">
                     <AudioSlider volume={volume} onVolumeChange={handleVolumeChange} />

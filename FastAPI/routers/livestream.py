@@ -32,7 +32,7 @@ async def getAllLivestreams(db: db_dependency):
         return livestreams
     raise HTTPException(status_code=404, detail='No Livestream Found')
 
-@router.get('/livestreams/${genreID}', status_code=status.HTTP_200_OK)
+@router.get('/livestreams/{genreID}', status_code=status.HTTP_200_OK)
 async def getLivestreamsByGenre(db: db_dependency, genreID: int = Path(gt=0)):
     livestream_model = db.query(Livestream).filter(Livestream.genre_id == genreID).all()
     if livestream_model is None:
