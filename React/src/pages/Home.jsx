@@ -43,7 +43,7 @@ export default function Example() {
   return (
     <div style={backgroundStyle}>
       <div style={overlayStyle}>
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-12 lg:left-12">
+        <div className="absolute top-4 left-4 sm:top-10 sm:left-6 md:top-10 md:left-5 lg:top-10 lg:left-5">
           <motion.div
             initial='hidden'
             animate='visible'
@@ -62,9 +62,9 @@ export default function Example() {
               }
             }}
           >
-            <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
-              LofiHaven
-            </h1>
+          <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
+            LofiHaven
+          </h1>
           </motion.div>
         </div>
 

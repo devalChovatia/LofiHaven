@@ -22,7 +22,6 @@ export default function Request() {
     } catch (error) {
       console.log(error)
       alert('Failed to Submit Request')
-      
     }
   }
 
@@ -35,7 +34,7 @@ export default function Request() {
         Submit a Request
       </button>
       <Popup open={open} onClose={() => setOpen(false)}>
-        <div className="text-center w-56 md:w-[450px] lg:w-[550px] xl:w-[750px]">
+        <div className="text-center w-56 font-sawarabi md:w-[450px] lg:w-[550px] xl:w-[750px]">
           <div className="mx-auto my-4 w-48 md:w-[400px] lg:w-[500px] xl:w-[700px]">
             <h3 className="text-[20px] font-black text-gray-800 w-full">
               Submit a Genre Request

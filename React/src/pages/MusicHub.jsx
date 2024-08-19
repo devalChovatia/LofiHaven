@@ -67,7 +67,7 @@ export default function MusicHub() {
                 <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
                 LofiHaven
                 </h1>
-                <div className="md:text-xl font-sawarabi sm:text-xl text-white">
+                <div className="md:text-xl font-sawarabi xl:text-2xl text-white">
                 <Clock />
                 </div>
                 
@@ -80,22 +80,17 @@ export default function MusicHub() {
                     <Request />
                 </div>
             </div>
-            <div className='absolute bottom-1 w-full p-2 flex flex-col md:flex-row items-center justify-between mt-5 gap-7 md:mt-[60px]'>
+            <div className='absolute bottom-1 w-full p-2 flex flex-col md:flex-row items-center justify-between gap-6'>
                 <div className="md:ml-4">
                     <Links />
                 </div>  
                     <div className="">
                     <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
                 </div>
-                <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block">
+                <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block md:mr-4">
                     {isFullscreen ? <Minimize className='w-6 h-6 xl:w-8 xl:h-8'/> : <Maximize className='w-6 h-6 xl:w-8 xl:h-8' />}
                 </button>  
-                
             </div>
-
-                {/* mt-5 mr-5 text-white rounded hidden sm:block ml-auto */}
-
-
-            </div>
+        </div>
     );
 }

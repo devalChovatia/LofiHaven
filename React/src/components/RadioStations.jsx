@@ -47,7 +47,6 @@ export default function RadioStations({ handleGifChange }) {
 
     return (
         <div className='mt-12 md:mt-20 xl:mt-32'>
-        {/*  */}
             <ul className="flex flex-col pl-4 md:pl-8 gap-1 text-[11px] md:w-[230px] xl:text-[15px] xl:w-[300px] xl:gap-2 text-white font-sawarabi space-y-2 border-r-2 border-white border-opacity-10 ">
                 {genres.map((genre, index) => (
                     <li key={index} onClick={() => handleGifSelect(gifs[genre])}>
