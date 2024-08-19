@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import backgroundGif from "../assets/Placeholder.gif";
 import RadioStations from '../components/RadioStations';
 import Request from '../components/Request';
 import Clock from '../components/Clock';
 import MusicPlayer from '../components/MusicPlayer';
-import idleSong from "../../public/HomePage_Idle.mp3";
 import Links from '../components/Links';
 import { Maximize, Minimize } from 'lucide-react';
 import AudioSlider from '../components/AudioSlider';
@@ -14,40 +13,99 @@ export default function MusicHub() {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(50);
-    const [audio] = useState(new Audio(idleSong));
+    const audio = useRef(new Audio());
     const [channelName, setChannelName] = useState(null);
-    const [livestreamLink, setLivestreamLink] = useState()
+    const [livestreamLink, setLivestreamLink] = useState();
+    const playerRef = useRef(null);
 
     const handleChannelName = (name) => {
         setChannelName(name);
     };
 
     const handleLivestreamLink = (link) => {
-        setLivestreamLink(link)
-    }
+        setLivestreamLink(link);
+    };
 
     useEffect(() => {
-        audio.loop = true;
-        audio.volume = volume / 100;
+        const currentAudio = audio.current;
+        currentAudio.loop = true;
+        currentAudio.volume = volume / 100;
 
         if (isPlaying) {
-            audio.play();
+            currentAudio.play();
         } else {
-            audio.pause();
+            currentAudio.pause();
         }
 
         return () => {
-            audio.pause();
+            currentAudio.pause();
         };
-    }, [audio, isPlaying]);
+    }, [isPlaying]);
 
     useEffect(() => {
-        audio.volume = volume / 100;
-    }, [volume, audio]);
+        audio.current.volume = volume / 100;
+    }, [volume]);
 
     useEffect(() => {
         setGif(backgroundGif);
     }, []);
+
+    useEffect(() => {
+        const loadYouTubeAPI = () => {
+            if (window.YT && window.YT.Player) {
+                playerRef.current = new window.YT.Player('player', {
+                    height: '0',
+                    width: '0',
+                    videoId: livestreamLink ? livestreamLink.split('v=')[1] : '',
+                    events: {
+                        'onReady': (event) => {
+                            if (isPlaying) {
+                                event.target.playVideo();
+                            }
+                        },
+                        'onStateChange': (event) => {
+                            if (event.data === window.YT.PlayerState.ENDED) {
+                                setIsPlaying(false);
+                            }
+                        }
+                    }
+                });
+            } else {
+                const script = document.createElement('script');
+                script.src = "https://www.youtube.com/iframe_api";
+                script.onload = () => {
+                    if (window.YT && window.YT.Player) {
+                        playerRef.current = new window.YT.Player('player', {
+                            height: '0',
+                            width: '0',
+                            videoId: livestreamLink ? livestreamLink.split('v=')[1] : '',
+                            events: {
+                                'onReady': (event) => {
+                                    if (isPlaying) {
+                                        event.target.playVideo();
+                                    }
+                                },
+                                'onStateChange': (event) => {
+                                    if (event.data === window.YT.PlayerState.ENDED) {
+                                        setIsPlaying(false);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                };
+                document.body.appendChild(script);
+            }
+        };
+
+        loadYouTubeAPI();
+
+        return () => {
+            if (playerRef.current) {
+                playerRef.current.destroy();
+            }
+        };
+    }, [livestreamLink, isPlaying]);
 
     const backgroundStyle = {
         backgroundImage: `url(${gif})`,
@@ -101,12 +159,13 @@ export default function MusicHub() {
                 </div>  
                 <div className="flex flex-col items-center">
                     <AudioSlider volume={volume} onVolumeChange={handleVolumeChange} />
-                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} playerRef={playerRef} />
                 </div>
                 <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block md:mr-4">
                     {isFullscreen ? <Minimize className='w-6 h-6 xl:w-8 xl:h-8'/> : <Maximize className='w-6 h-6 xl:w-8 xl:h-8' />}
                 </button>  
             </div>
+            <div id="player" style={{ display: 'none' }}></div>
         </div>
     );
 }

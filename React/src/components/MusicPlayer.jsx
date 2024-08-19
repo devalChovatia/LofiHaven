@@ -1,10 +1,17 @@
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import React from 'react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
-export default function MusicPlayer({ isPlaying, setIsPlaying }) {
+export default function MusicPlayer({ isPlaying, setIsPlaying, playerRef }) {
 
     const togglePlayPause = () => {
-        setIsPlaying(prev => !prev);
+        if (playerRef.current) {
+            if (isPlaying) {
+                playerRef.current.pauseVideo();
+            } else {
+                playerRef.current.playVideo();
+            }
+            setIsPlaying(prev => !prev);
+        }
     };
 
     return (
