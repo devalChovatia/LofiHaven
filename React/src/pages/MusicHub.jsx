@@ -45,7 +45,7 @@ export default function MusicHub() {
         const playAudio = async () => {
             try {
                 if (isPlaying && !playerRef.current){ 
-                    await currentAudio.play();
+                    currentAudio.play();
                 } else {
                     currentAudio.pause();
                 }
@@ -59,7 +59,6 @@ export default function MusicHub() {
 
         return () => {
             currentAudio.pause();
-            currentAudio.src = '';
         };
     }, [isPlaying, volume, audioSrc]);
 
@@ -131,11 +130,6 @@ export default function MusicHub() {
         }
     }, [volume]);
 
-    useEffect(() => {
-        if (playerRef.current) {
-            setIsPlaying(false); 
-        }
-    }, [livestreamLink]);
 
     const backgroundStyle = {
         backgroundImage: `url(${gif})`,

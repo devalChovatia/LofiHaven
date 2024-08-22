@@ -9,7 +9,7 @@ export default function AudioSlider({ volume, onVolumeChange }) {
   };
 
   return (
-    <div className="volume-slider hidden md:flex flex-row gap-2 items-center mb-5">
+    <div className="volume-slider flex flex-row gap-2 items-center mb-5">
       <div className="volume-icon text-white">{getVolumeIcon()}</div>
       <input
         type="range"
