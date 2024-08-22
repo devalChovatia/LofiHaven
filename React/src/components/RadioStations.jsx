@@ -38,9 +38,6 @@ export default function RadioStations({ handleGifChange, handleChannelName, hand
             const res = await axios.get(`http://localhost:8000/livestreams/${genreID}`);
             const channelData = res.data
             const firstInstance = res.data[0]
-            console.log(channelData)
-
-
 
             if (channelData) {
                 handleChannelName(firstInstance.channel_name);
