@@ -16,7 +16,9 @@ export default function MusicHub() {
     const audio = useRef(new Audio());
     const [channelName, setChannelName] = useState(null);
     const [livestreamLink, setLivestreamLink] = useState();
+    const [genreID, setGenreID] = useState()
     const playerRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0)
 
     const handleChannelName = (name) => {
         setChannelName(name);
@@ -25,6 +27,13 @@ export default function MusicHub() {
     const handleLivestreamLink = (link) => {
         setLivestreamLink(link);
     };
+
+    const handleGenreID = (genre) =>{
+        setGenreID(genre)
+    }
+    const handleCurrentIndex = (index) => {
+        setCurrentIndex(index)
+    }
 
     useEffect(() => {
         const currentAudio = audio.current;
@@ -147,7 +156,7 @@ export default function MusicHub() {
             </div>
             <div className='flex flex-col gap-6 xl:gap-20 xl:w-[275px]'>
                 <div className="">
-                    <RadioStations handleGifChange={handleGifChange} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} />
+                    <RadioStations handleGifChange={handleGifChange} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} handleGenreID={handleGenreID} handleCurrentIndex={handleCurrentIndex} />
                 </div>
                 <div className="">
                     <Request />
@@ -159,7 +168,7 @@ export default function MusicHub() {
                 </div>  
                 <div className="flex flex-col items-center">
                     <AudioSlider volume={volume} onVolumeChange={handleVolumeChange} />
-                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} playerRef={playerRef} />
+                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} playerRef={playerRef} genreID={genreID} handleCurrentIndex={handleCurrentIndex} currentIndex={currentIndex} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} />
                 </div>
                 <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block md:mr-4">
                     {isFullscreen ? <Minimize className='w-6 h-6 xl:w-8 xl:h-8'/> : <Maximize className='w-6 h-6 xl:w-8 xl:h-8' />}

@@ -11,7 +11,7 @@ import SereneScenes from "../assets/SereneScenes.gif";
 import LateNightLights from "../assets/LateNightLights.gif";
 import LoFiFlows from "../assets/LoFiFlows.gif";
 
-export default function RadioStations({ handleGifChange, handleChannelName, handleLivestreamLink }) {
+export default function RadioStations({ handleGifChange, handleChannelName, handleLivestreamLink, handleGenreID, handleCurrentIndex }) {
     const [selectedGif, setSelectedGif] = useState(null);
     const [genres, setGenres] = useState([]);
 
@@ -36,11 +36,18 @@ export default function RadioStations({ handleGifChange, handleChannelName, hand
         try {
             const genreID = genre.id;
             const res = await axios.get(`http://localhost:8000/livestreams/${genreID}`);
-            const channelData = res.data[0]; 
+            const channelData = res.data
+            const firstInstance = res.data[0]
+            console.log(channelData)
+
+
 
             if (channelData) {
-                handleChannelName(channelData.channel_name);
-                handleLivestreamLink(channelData.livestream_link);
+                handleChannelName(firstInstance.channel_name);
+                handleGenreID(firstInstance.genre_id)
+                handleLivestreamLink(firstInstance.livestream_link);
+                handleCurrentIndex(0)
+                
             }
         } catch (error) {
             console.error('Error calling API:', error);
