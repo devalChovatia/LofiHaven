@@ -13,12 +13,13 @@ export default function MusicHub() {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(50);
+    const [audioSrc, setAudioSrc] = useState('');
     const audio = useRef(new Audio());
     const [channelName, setChannelName] = useState(null);
     const [livestreamLink, setLivestreamLink] = useState();
-    const [genreID, setGenreID] = useState()
+    const [genreID, setGenreID] = useState();
     const playerRef = useRef(null);
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleChannelName = (name) => {
         setChannelName(name);
@@ -28,32 +29,39 @@ export default function MusicHub() {
         setLivestreamLink(link);
     };
 
-    const handleGenreID = (genre) =>{
-        setGenreID(genre)
-    }
+    const handleGenreID = (genre) => {
+        setGenreID(genre);
+    };
+
     const handleCurrentIndex = (index) => {
-        setCurrentIndex(index)
-    }
+        setCurrentIndex(index);
+    };
 
     useEffect(() => {
         const currentAudio = audio.current;
         currentAudio.loop = true;
-        currentAudio.volume = volume / 100;
+        currentAudio.src = audioSrc;
 
-        if (isPlaying) {
-            currentAudio.play();
-        } else {
-            currentAudio.pause();
-        }
+        const playAudio = async () => {
+            try {
+                if (isPlaying && !playerRef.current){ 
+                    await currentAudio.play();
+                } else {
+                    currentAudio.pause();
+                }
+                currentAudio.volume = volume / 100;
+            } catch (error) {
+                console.error("Error playing audio:", error);
+            }
+        };
+
+        playAudio();
 
         return () => {
             currentAudio.pause();
+            currentAudio.src = '';
         };
-    }, [isPlaying]);
-
-    useEffect(() => {
-        audio.current.volume = volume / 100;
-    }, [volume]);
+    }, [isPlaying, volume, audioSrc]);
 
     useEffect(() => {
         setGif(backgroundGif);
@@ -116,6 +124,19 @@ export default function MusicHub() {
         };
     }, [livestreamLink, isPlaying]);
 
+    useEffect(() => {
+        if (playerRef.current) {
+            const volumeLevel = Math.min(Math.max(volume, 0), 100);
+            playerRef.current.setVolume(volumeLevel); 
+        }
+    }, [volume]);
+
+    useEffect(() => {
+        if (playerRef.current) {
+            setIsPlaying(false); 
+        }
+    }, [livestreamLink]);
+
     const backgroundStyle = {
         backgroundImage: `url(${gif})`,
         backgroundSize: 'cover',
@@ -141,11 +162,12 @@ export default function MusicHub() {
     };
 
     const handleVolumeChange = (e) => {
-        setVolume(e.target.value);
+        const newVolume = Number(e.target.value);
+        setVolume(newVolume);
     };
 
     return (
-        <div style={backgroundStyle} className="">
+        <div style={backgroundStyle}>
             <div className='flex flex-col text-center md:flex-row md:text-left md:justify-between px-5 pt-10'>
                 <h1 className="font-caveat font-semibold text-3xl md:text-[40px] lg:text-[48px] 2xl:text-[70px] text-white">
                     LofiHaven
@@ -155,10 +177,17 @@ export default function MusicHub() {
                 </div>
             </div>
             <div className='flex flex-col gap-6 xl:gap-20 xl:w-[275px]'>
-                <div className="">
-                    <RadioStations handleGifChange={handleGifChange} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} handleGenreID={handleGenreID} handleCurrentIndex={handleCurrentIndex} />
+                <div>
+                    <RadioStations 
+                        handleGifChange={handleGifChange} 
+                        handleChannelName={handleChannelName} 
+                        handleLivestreamLink={handleLivestreamLink} 
+                        handleGenreID={handleGenreID} 
+                        handleCurrentIndex={handleCurrentIndex} 
+                        setAudioSrc={setAudioSrc} // Pass the function to update audio source
+                    />
                 </div>
-                <div className="">
+                <div>
                     <Request />
                 </div>
             </div>
@@ -168,7 +197,8 @@ export default function MusicHub() {
                 </div>  
                 <div className="flex flex-col items-center">
                     <AudioSlider volume={volume} onVolumeChange={handleVolumeChange} />
-                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} playerRef={playerRef} genreID={genreID} handleCurrentIndex={handleCurrentIndex} currentIndex={currentIndex} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} />
+                    <MusicPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} playerRef={playerRef} genreID={genreID} handleCurrentIndex={handleCurrentIndex} currentIndex={currentIndex} handleChannelName={handleChannelName} handleLivestreamLink={handleLivestreamLink} 
+                    />
                 </div>
                 <button onClick={handleFullscreenToggle} className=" text-white rounded hidden sm:block md:mr-4">
                     {isFullscreen ? <Minimize className='w-6 h-6 xl:w-8 xl:h-8'/> : <Maximize className='w-6 h-6 xl:w-8 xl:h-8' />}
