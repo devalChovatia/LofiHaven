@@ -21,7 +21,7 @@ class Livestream(Base):
     channel_name = Column(String)
     livestream_link = Column(String, unique=True)
 
-class Submission(Base, TestBase):
+class Submission(Base):
     __tablename__ = 'Requests'
 
     id = Column(Integer, primary_key=True, index=True)

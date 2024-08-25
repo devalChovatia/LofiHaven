@@ -27,6 +27,8 @@ async def addSubmission(db: db_dependency, submissionToAdd: SubmissionRequest):
     submission_model = Submission(**submissionToAdd.model_dump())
     db.add(submission_model)
     db.commit()
+    db.refresh(submission_model)
+    return submission_model
 
 @router.delete('/submission', status_code=status.HTTP_204_NO_CONTENT)
 async def deleteSubmission(db: db_dependency, submission_id: int = Query(gt=0)):
@@ -35,3 +37,4 @@ async def deleteSubmission(db: db_dependency, submission_id: int = Query(gt=0)):
         raise HTTPException(status_code=404, detail='Submission Not Found')
     db.query(Submission).filter(Submission.id == submission_id).delete()
     db.commit()
+    

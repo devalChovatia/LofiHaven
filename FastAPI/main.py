@@ -17,7 +17,6 @@ app.add_middleware(
 )
 
 models.Base.metadata.create_all(bind=engine)
-models.TestBase.metadata.create_all(bind=test_engine)
 
 app.include_router(genre.router)
 app.include_router(livestream.router)

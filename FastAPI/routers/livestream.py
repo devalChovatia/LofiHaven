@@ -17,7 +17,6 @@ class LivestreamRequest(BaseModel):
     livestream_link: str
     genre_id: int = Field(gt=0)
 
-
 @router.get('/livestreams')
 async def getAllLivestreams(db: db_dependency):
     livestreams = db.query(Livestream).all()

@@ -30,7 +30,9 @@ async def addGenre(db: db_dependency, genreToAdd: GenreRequest):
     genre_model = Genres(**genreToAdd.model_dump())
     db.add(genre_model)
     db.commit()
-
+    db.refresh(genre_model)
+    return genre_model
+    
 @router.delete('/genres', status_code=status.HTTP_204_NO_CONTENT)
 async def deleteGenre(db: db_dependency, genre_id: int = Query(gt=0)):
     genre_model = db.query(Genres).filter(Genres.id == genre_id).first()
