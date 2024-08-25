@@ -5,15 +5,11 @@ from pydantic import BaseModel, Field
 from database import SessionLocal
 from starlette import status
 from models import Genres
+from database import get_db
+from test_database import override_get_db
+
 
 router = APIRouter(tags=['genre'])
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally: 
-        db.close()
 
 
 db_dependency = Annotated[Session, Depends(get_db)]
@@ -25,9 +21,9 @@ class GenreRequest(BaseModel):
 @router.get('/genres', status_code=status.HTTP_200_OK)
 async def getAllGenres(db: db_dependency):
     genres = db.query(Genres).all()
-    if genres is not None:
-        return genres
-    raise HTTPException(status_code=404, detail="No Genres Available")
+    if not genres:
+      raise HTTPException(status_code=404, detail="No Genres Available")
+    return genres
 
 @router.post('/genres', status_code=status.HTTP_201_CREATED)
 async def addGenre(db: db_dependency, genreToAdd: GenreRequest):

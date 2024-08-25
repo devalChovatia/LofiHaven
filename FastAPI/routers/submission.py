@@ -5,16 +5,9 @@ from pydantic import BaseModel, Field
 from database import SessionLocal
 from starlette import status
 from models import Submission
+from database import get_db
 
 router = APIRouter(tags=['submission'])
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally: 
-        db.close()
-
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
@@ -22,13 +15,12 @@ class SubmissionRequest(BaseModel):
     submission_type: str
     submission_request: str = Field(max_length=75)
 
-
 @router.get('/submission', status_code=status.HTTP_200_OK)
 async def getAllSubmissions(db: db_dependency):
     submissions = db.query(Submission).all()
-    if submissions is not None:
-        return submissions
-    raise HTTPException(status_code=404, detail='No Submissions Available')
+    if not submissions:
+        raise HTTPException(status_code=404, detail='No Submissions Available')
+    return submissions
 
 @router.post('/submission', status_code=status.HTTP_201_CREATED)
 async def addSubmission(db: db_dependency, submissionToAdd: SubmissionRequest):

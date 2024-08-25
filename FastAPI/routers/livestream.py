@@ -5,16 +5,9 @@ from pydantic import BaseModel, Field
 from database import SessionLocal
 from starlette import status
 from models import Livestream
+from database import get_db
 
 router = APIRouter(tags=['livestream'])
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally: 
-        db.close()
-
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
@@ -28,9 +21,9 @@ class LivestreamRequest(BaseModel):
 @router.get('/livestreams')
 async def getAllLivestreams(db: db_dependency):
     livestreams = db.query(Livestream).all()
-    if livestreams is not None:
-        return livestreams
-    raise HTTPException(status_code=404, detail='No Livestream Found')
+    if not livestreams:
+        raise HTTPException(status_code=404, detail='No Livestreams Found')
+    return livestreams
 
 @router.get('/livestreams/{genreID}', status_code=status.HTTP_200_OK)
 async def getLivestreamsByGenre(db: db_dependency, genreID: int = Path(gt=0)):

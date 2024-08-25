@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import models 
 from database import engine
+from test_database import test_engine
 from routers import genre, livestream, submission, youtube
 
 app = FastAPI()
@@ -16,6 +17,7 @@ app.add_middleware(
 )
 
 models.Base.metadata.create_all(bind=engine)
+models.TestBase.metadata.create_all(bind=test_engine)
 
 app.include_router(genre.router)
 app.include_router(livestream.router)

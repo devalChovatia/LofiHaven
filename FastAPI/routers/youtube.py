@@ -8,20 +8,12 @@ from pydantic import BaseModel, Field
 from models import Livestream as DBLivestream
 import os
 from dotenv import load_dotenv
+from database import get_db
 
 load_dotenv()
 API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 router = APIRouter(tags=['youtube'])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally: 
-        db.close()
-
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
