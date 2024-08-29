@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: dchov/react:1.0.1
+    container_name: 'react_app'
+    ports:
+      - "5173:5173"
+
+  backend:
+    image: dchov/fastapi:1.0.1
+    container_name: 'fastapi_app'
+    ports:
+      - "8000:8000"
