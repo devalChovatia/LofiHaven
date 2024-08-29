@@ -34,7 +34,7 @@ class Genres(TestBase):
     __tablename__ = 'Genres'
 
     id = Column(Integer, primary_key=True, index=True)
-    genre_name = Column(String, unique=True)
+    genre_name = Column(String)
 
 class Livestream(TestBase):
     __tablename__ = 'Livestreams'
