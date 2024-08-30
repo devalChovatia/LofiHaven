@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: frontend
+    image: dchov/react:1.0.2
+    env: docker
+    port: 5173
+    plan: starter # Adjust based on your needs
+    healthCheckPath: / # Adjust based on your health check endpoint
+
+  - type: web
+    name: backend
+    image: dchov/fastapi:1.0.2
+    env: docker
+    port: 8000
+    plan: starter # Adjust based on your needs
+    healthCheckPath: / # Adjust based on your health check endpoint
