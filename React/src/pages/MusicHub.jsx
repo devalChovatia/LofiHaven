@@ -44,7 +44,7 @@ export default function MusicHub() {
 
         const playAudio = async () => {
             try {
-                if (isPlaying && !playerRef.current){ 
+                if (isPlaying) { 
                     currentAudio.play();
                 } else {
                     currentAudio.pause();
@@ -124,12 +124,19 @@ export default function MusicHub() {
     }, [livestreamLink, isPlaying]);
 
     useEffect(() => {
-        if (playerRef.current) {
-            const volumeLevel = Math.min(Math.max(volume, 0), 100);
-            playerRef.current.setVolume(volumeLevel); 
-        }
-    }, [volume]);
+        const setPlayerVolume = () => {
+            if (playerRef.current && playerRef.current.setVolume) {
+                const volumeLevel = Math.min(Math.max(volume, 0), 100);
+                playerRef.current.setVolume(volumeLevel);
+            } else {
+                console.error('YouTube player is not initialized or setVolume is not available');
+            }
+        };
 
+        const timeoutId = setTimeout(setPlayerVolume, 500); // Small delay to ensure player is ready
+
+        return () => clearTimeout(timeoutId);
+    }, [volume]);
 
     const backgroundStyle = {
         backgroundImage: `url(${gif})`,

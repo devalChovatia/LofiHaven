@@ -18,7 +18,11 @@ app.add_middleware(
 
 models.Base.metadata.create_all(bind=engine)
 
+
 app.include_router(genre.router)
 app.include_router(livestream.router)
 app.include_router(submission.router)
 app.include_router(youtube.router)
+
+
+
