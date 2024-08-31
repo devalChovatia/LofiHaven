@@ -18,7 +18,7 @@ export default function MusicPlayer({ isPlaying, setIsPlaying, playerRef, genreI
     const toggleNextPrev = async(direction) =>{
         try {
             const genre_id = genreID
-            const res = await axios.get(`http://localhost:8000/livestreams/${genre_id}`)
+            const res = await axios.get(`https://fastapi-ps1m.onrender.com/livestreams/${genre_id}`)
             const length = res.data.length
 
             if(direction === 'next' && currentIndex < length){

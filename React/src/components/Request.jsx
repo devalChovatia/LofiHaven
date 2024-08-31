@@ -16,7 +16,7 @@ export default function Request() {
     }
 
     try {
-      await axios.post('http://localhost:8000/submission', data)
+      await axios.post('https://fastapi-ps1m.onrender.com/submission', data)
       alert('Request Successfully Submitted')
       setRequestText('')
       setRequestType('')

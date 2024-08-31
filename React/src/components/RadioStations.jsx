@@ -35,7 +35,7 @@ export default function RadioStations({ handleGifChange, handleChannelName, hand
 
         try {
             const genreID = genre.id;
-            const res = await axios.get(`http://localhost:8000/livestreams/${genreID}`);
+            const res = await axios.get(`https://fastapi-ps1m.onrender.com/livestreams/${genreID}`);
             const channelData = res.data
             const firstInstance = res.data[0]
 
@@ -57,7 +57,7 @@ export default function RadioStations({ handleGifChange, handleChannelName, hand
     useEffect(() => {
         const getAllGenres = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/genres');
+                const res = await axios.get('https://fastapi-ps1m.onrender.com/genres');
                 const genreList = res.data.map(item => ({ id: item.id, name: item.genre_name }));
                 setGenres(genreList);
             } catch (error) {
