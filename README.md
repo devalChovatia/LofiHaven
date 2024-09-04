@@ -4,6 +4,18 @@
 
 This project is a live streaming application that utilizes React for the frontend and FastAPI for the backend. It fetches and displays live streams from YouTube, providing users with real-time music content.
 
+![image](https://github.com/user-attachments/assets/af11a591-0b6a-4732-b8ce-23075e5baf12)
+
+Coming Soon --> Pomodoro 
+___
+
+## Process
+
+This design was created using Figma with a focus on minimalism to enhance the user experience. The streamlined user interface was intentionally kept simple to allow users to easily explore and select their preferred genres of lo-fi music, ensuring that their choices are the main highlight of the application.
+![image](https://github.com/user-attachments/assets/19c11029-b31f-48e5-a869-a4332072e34d)
+
+___
+
 ## Features
 
 - **Live Stream Integration**:
