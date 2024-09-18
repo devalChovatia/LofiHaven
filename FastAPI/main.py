@@ -7,7 +7,7 @@ from routers import genre, livestream, submission, youtube
 
 app = FastAPI()
 
-orig_host = "https://lofihaven.onrender.com"  
+orig_host = "https://lofihaven.vercel.app"  
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[orig_host],
