@@ -1,4 +1,4 @@
-# LofiHaven [(Live Site)](https://lofihaven.onrender.com/)
+# LofiHaven [(Live Site)](https://lofihaven.vercel.app/)
 
 ## Overview
 
